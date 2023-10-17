@@ -11,7 +11,7 @@
 <body>
   <div class="container">
     <div class="header">
-      <div id="user">
+      <div class="user">
         <p class="username"><span id="name">Tofunmi</span>'s</p>
         <h1>To-do List</h1>
       </div>
@@ -26,19 +26,19 @@
       </button>
     </div>
     <div class="tab-container">
-      <div class="tab">All</div>
-      <div class="tab">Pending</div>
-      <div class="tab">Completed</div>
+      <span id="all" class="tab active">All</span>
+      <span id="pending" class="tab">Pending</span>
+      <span id="completed" class="tab">Completed</span>
     </div>
-    <div class="task-list">
+    <div id="task-list" class="task-list">
       <div class="task">
-        <input type="check" id="task1">
-        <label for="task1">
-          <p>Renew gym membership</p>
+        <label for="task2">
+          <input type="checkbox" id="task2">
+          <p>Buy groceries</p>
         </label>
-        <button class="task-options">
+        <div class="task-options">
           <img src="svgs/options1.svg" alt="options">
-        </button>
+        </div>
       </div>
     </div>
   </div>
