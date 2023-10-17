@@ -103,6 +103,17 @@ input[type=text]:focus {
   border: 1px solid rgba(89, 98, 80, 0.07);
   background: #ECF4E6;
   box-shadow: 0px -2px 2px 0px rgba(89, 98, 80, 0.06) inset, 0px 2px 3px 0px rgba(255, 255, 255, 0.10) inset, 0px 1px 2px 0px rgba(3, 5, 2, 0.04);
+  transition: all .2s ease-in-out;
+}
+
+#submit:hover {
+  scale: 1.3;
+  cursor: pointer;
+}
+
+#submit:active {
+  background: #ECF4E6;
+  box-shadow: none;
 }
 
 .tab-container {
@@ -130,7 +141,7 @@ input[type=text]:focus {
   color: #030502;
   border: 1px solid #ECF4E6;
   background: #FFF;
-  box-shadow: 0px 1px 2px 0px rgba(3, 5, 2, 0.04), 0px 1px 3px 0px rgba(3, 5, 2, 0.09), 0px -2px 3px 0px rgba(89, 98, 80, 0.06) inset, 0px -6px 8px 0px rgba(89, 98, 80, 0.03) inset;
+  box-shadow: 0px 1px 2px 0px rgba(3, 5, 2, 0.04), 0px 1px 3px 0px rgba(3, 5, 2, 0.09), 0px -2px 4px 0px rgba(89, 98, 80, 0.05) inset, 0px -6px 9px 0px rgba(89, 98, 80, 0.02) inset;
 }
 
 .task-list {
@@ -138,6 +149,8 @@ input[type=text]:focus {
   flex-direction: column;
   position: relative;
   gap: .8rem;
+  max-height: 24rem;
+  overflow: scroll;
 }
 
 .task {
@@ -192,6 +205,7 @@ label {
   background: #FFF;
   box-shadow: 0px 1px 2px 0px rgba(3, 5, 2, 0.07),0px 3px 6px 0px rgba(3, 5, 2, 0.03);
   overflow: hidden;
+  z-index: 2;
 }
 
 .option {
@@ -209,4 +223,9 @@ label {
 
 div.delete {
   color: #C64E3D;
+}
+
+.checked {
+  text-decoration: line-through;
+  color: #596250;
 }
