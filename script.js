@@ -4,6 +4,8 @@ let taskList = document.getElementById("task-list");
 
 let todos = JSON.parse(localStorage.getItem("todos")) || [];
 
+let toEditId = null;
+
 function createItem(todo, isCompleted) {
   //create the item
   const todoEl = document.createElement("div");
@@ -24,7 +26,7 @@ function createItem(todo, isCompleted) {
 
   //create the edit option
   const editOption = document.createElement("div");
-  editOption.classList.add("option");
+  editOption.classList.add("option", "edit");
 
   const editIcon = document.createElement("img");
   editIcon.src = "svgs/edit.svg";
@@ -97,6 +99,17 @@ function getLatestItem() {
   createItem(latestItem);
 }
 
+function reloadItems() {
+  const allTasks  = taskList.querySelectorAll('.task');
+  console.log(allTasks);
+  for (let i = 0; i < allTasks.length; i++) {
+    const taskToRemove = allTasks[i];
+    taskList.removeChild(taskToRemove);
+  }
+  localStorage.setItem("todos", JSON.stringify(todos));
+  getTodos();
+}
+
 function updateStatus(selectedTask) {
   let taskName = selectedTask.parentNode.querySelector("p");
   //get task index
@@ -116,16 +129,6 @@ function updateStatus(selectedTask) {
   localStorage.setItem("todos", JSON.stringify(todos));
 }
 
-//add event listener to the task divs
-const taskItem = document.querySelectorAll(".task");
-
-// taskItem.forEach(task => {
-//   task.addEventListener("click", () => {
-//     const taskInputEl = task.querySelector("input");
-//     taskInputEl.click();
-//   })
-
-// })
 
 //add event listener to the submit button 
 const inputSubmitBtn = document.getElementById("submit");
@@ -144,14 +147,23 @@ taskInput.addEventListener("keypress", function(event) {
 
 function addTodo() {
   const task = taskInput.value.trim();
-  if (task != "") {
+  if (task != "" && toEditId == null) {
     let taskInfo = {name: task, id: Date.now(), status: "pending" };
     todos.push(taskInfo);
     localStorage.setItem("todos", JSON.stringify(todos));
     taskInput.value = "";
     getLatestItem();
+  } else if (task != "" && toEditId != null) {
+    const taskToUpdate = todos.find(todo => todo.id === toEditId);
+    taskToUpdate.name = task;
+    //todos.push(taskInfo);
+    localStorage.setItem("todos", JSON.stringify(todos));
+    taskInput.value = "";
+    toEditId = null;
+    reloadItems();
   }
 }
+
 
 // Add a click event listener to the document
 document.addEventListener('click', function(event) {
@@ -172,7 +184,7 @@ document.addEventListener('click', function(event) {
         optionsMenu.style.display = "none";
       } else {
         closeMenus();
-        optionsMenu.style.display = "flex"; 
+        optionsMenu.style.display = "flex";
       }
       
     } else if (event.target.matches('.task')) {
@@ -180,6 +192,15 @@ document.addEventListener('click', function(event) {
        const taskInputEl = task.querySelector("input");
        taskInputEl.click();
       
+    } else if (event.target.matches('.edit')) {
+        const task = event.target.closest(".task");
+        const taskInputEl = taskInput;
+        taskInputEl.value = task.querySelector("p").textContent;
+        taskInputEl.focus();
+        console.log("edit option clicked");
+        toEditId = parseInt(task.querySelector("input").id, 10);
+        console.log(toEditId)
+        
     } else {
       // Close all option menus by hiding them
       closeMenus();

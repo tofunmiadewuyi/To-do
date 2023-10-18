@@ -66,7 +66,7 @@ input[type=text] {
   display: flex;
   width: 100%;
   height: 2.8rem;
-  padding: 12px;
+  padding: 12px 48px 12px 12px;
   border-radius: 8px;
   border: 1px solid rgba(89, 98, 80, 0.09);
   background: #FAFBF9;
@@ -107,7 +107,7 @@ input[type=text]:focus {
 }
 
 #submit:hover {
-  scale: 1.3;
+  scale: 1.25;
   cursor: pointer;
 }
 
@@ -137,6 +137,10 @@ input[type=text]:focus {
   height: 2.4rem;
 }
 
+.tab:hover {
+  background: rgba(0, 0, 0, 0.03);
+}
+
 .tab.active {
   color: #030502;
   border: 1px solid #ECF4E6;
@@ -150,25 +154,31 @@ input[type=text]:focus {
   position: relative;
   gap: .8rem;
   max-height: 24rem;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 
 .task {
   display: flex;
-  height: 3rem;
   justify-content: space-between;
   align-items: center;
   border-radius: 8px;
-  padding: 8px 8px 8px 12px;
+  padding: 8px 8px 8px 14px;
   border: 1px solid rgba(89, 98, 80, 0.08);
   background: #FFF;
   box-shadow: 0px -2px 3px 0px rgba(89, 98, 80, 0.04) inset, 0px 1px 3px 0px rgba(3, 5, 2, 0.09);
 }
 
-.task:hover {
+.task p {
+  line-height: 20px;
+}
+
+.task p:hover {
   color: #596250;
-  background: rgba(236, 244, 230, 0.25);
+}
+
+.task:hover {
   
+  background: rgba(236, 244, 230, 0.25);
 }
 
 .task:active {
@@ -196,9 +206,9 @@ label {
 
 .options-menu {
   position: absolute;
-  right: 0;
-  top: 2rem;
   display: flex;
+  right: 0;
+  top: 100%;
   flex-direction: column;
   border-radius: 12px;
   border: 1px solid rgba(3, 5, 2, 0.07);
@@ -206,6 +216,7 @@ label {
   box-shadow: 0px 1px 2px 0px rgba(3, 5, 2, 0.07),0px 3px 6px 0px rgba(3, 5, 2, 0.03);
   overflow: hidden;
   z-index: 2;
+  transition: all .3s ease-in-out;
 }
 
 .option {
