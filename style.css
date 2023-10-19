@@ -1,9 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;700&display=swap');
+
 
 html {
   height: 100%;
   width: 100%;
-  font-family: 'Work Sans', sans-serif;
+  font-family: 'Nunito', sans-serif;
 }
 
 * {
@@ -76,7 +79,7 @@ input[type=text] {
 input[type=text]::placeholder {
   color: rgba(3, 5, 2, 0.60);;
   font-size: 15px;
-  font-family: 'Work Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 input[type=text]:focus {
@@ -204,11 +207,22 @@ label {
   background: rgba(236, 244, 230, 0.7);
 }
 
+
+/* first 3 task items in view, options menu will open downwards */
+.open-downwards .task-options .options-menu {
+  top: 100%;
+}
+
+/* last 3 task items in view, options menu will open upwards */
+.open-upwards .task-options .options-menu {
+  bottom: 100%;
+}
+
+
 .options-menu {
   position: absolute;
   display: flex;
   right: 0;
-  top: 100%;
   flex-direction: column;
   border-radius: 12px;
   border: 1px solid rgba(3, 5, 2, 0.07);
@@ -240,3 +254,4 @@ div.delete {
   text-decoration: line-through;
   color: #596250;
 }
+

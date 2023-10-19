@@ -6,6 +6,7 @@ let todos = JSON.parse(localStorage.getItem("todos")) || [];
 
 let toEditId = null;
 
+
 function createItem(todo, isCompleted) {
   //create the item
   const todoEl = document.createElement("div");
@@ -164,6 +165,23 @@ function addTodo() {
   }
 }
 
+function updateMenuPosition(task) {
+  const containerRect = taskList.getBoundingClientRect();
+  const childRect = task.getBoundingClientRect();
+
+  const distanceToClear =  childRect.top - containerRect.top;
+
+  //optionsmenu is 106px tall, don't ask me how i know ;)
+  if (distanceToClear > 106) {
+    task.classList.remove("open-downwards");
+    task.classList.add("open-upwards");
+    console.log("it should open upwards");
+  } else {
+    task.classList.remove("open-upwards");
+    task.classList.add("open-downwards");
+  }
+}
+
 
 // Add a click event listener to the document
 document.addEventListener('click', function(event) {
@@ -184,6 +202,7 @@ document.addEventListener('click', function(event) {
         optionsMenu.style.display = "none";
       } else {
         closeMenus();
+        updateMenuPosition(task);
         optionsMenu.style.display = "flex";
       }
       
