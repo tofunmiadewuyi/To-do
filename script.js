@@ -169,16 +169,27 @@ function updateMenuPosition(task) {
   const containerRect = taskList.getBoundingClientRect();
   const childRect = task.getBoundingClientRect();
 
-  const distanceToClear =  childRect.top - containerRect.top;
+  const topDistanceToClear =  childRect.top - containerRect.top;
+  const btmDistanceToClear =  containerRect.bottom - childRect.bottom;
 
   //optionsmenu is 106px tall, don't ask me how i know ;)
-  if (distanceToClear > 106) {
+  if (topDistanceToClear > 106) {
     task.classList.remove("open-downwards");
+    task.classList.remove("open-leftwards");
+    
     task.classList.add("open-upwards");
-    console.log("it should open upwards");
+    
+  } else if (btmDistanceToClear > 106) {
+    task.classList.remove("open-upwards");
+    task.classList.remove("open-leftwards");
+    
+    task.classList.add("open-downwards");
+    
   } else {
     task.classList.remove("open-upwards");
-    task.classList.add("open-downwards");
+    task.classList.remove("open-downwards");
+    
+    task.classList.add("open-leftwards");
   }
 }
 
