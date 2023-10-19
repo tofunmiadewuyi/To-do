@@ -156,6 +156,9 @@ input[type=text]:focus {
   flex-direction: column;
   position: relative;
   gap: .8rem;
+}
+
+.scrollable {
   max-height: 24rem;
   overflow-y: scroll;
 }
