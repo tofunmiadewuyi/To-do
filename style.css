@@ -156,6 +156,9 @@ input[type=text]:focus {
   flex-direction: column;
   position: relative;
   gap: .8rem;
+}
+
+.scrollable {
   max-height: 24rem;
   overflow-y: scroll;
 }
@@ -211,18 +214,23 @@ label {
 /* first 3 task items in view, options menu will open downwards */
 .open-downwards .task-options .options-menu {
   top: 100%;
+  right: 0;
+}
+
+.open-leftwards .task-options .options-menu {
+  right: 100%;
 }
 
 /* last 3 task items in view, options menu will open upwards */
 .open-upwards .task-options .options-menu {
   bottom: 100%;
+  right: 0;
 }
 
 
 .options-menu {
   position: absolute;
   display: flex;
-  right: 0;
   flex-direction: column;
   border-radius: 12px;
   border: 1px solid rgba(3, 5, 2, 0.07);

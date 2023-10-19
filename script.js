@@ -6,19 +6,37 @@ let todos = JSON.parse(localStorage.getItem("todos")) || [];
 
 let toEditId = null;
 
+filters = document.querySelectorAll('.tab');
 
-function createItem(todo, isCompleted) {
+filters.forEach(filter => {
+  filter.addEventListener('click', () => {
+    document.querySelector(".active").classList.remove("active");
+    filter.classList.add("active");
+    const allTasks = document.querySelectorAll('.task');
+    allTasks.forEach(task => {
+      task.remove();
+    })
+    
+      getTodos(filter.id);
+  })
+})
+
+
+function createItem(todo, isCompleted, filter) {
   //create the item
   const todoEl = document.createElement("div");
   todoEl.classList.add("task");
 
-  todoEl.innerHTML = `
-  <label for="${todo.id}">
-    <input onclick="updateStatus(this)" type="checkbox" id="${todo.id}" ${isCompleted}>
-    <p class="${isCompleted}">${todo.name}</p>
-  </label>
-  `
-  taskList.appendChild(todoEl);
+  if (filter == todo.status || filter == "all") {
+    todoEl.innerHTML = `
+    <label for="${todo.id}">
+      <input onclick="updateStatus(this)" type="checkbox" id="${todo.id}" ${isCompleted}>
+      <p class="${isCompleted}">${todo.name}</p>
+    </label>
+    `
+    taskList.appendChild(todoEl);
+  } 
+
 
   //create the options-menu
   const menu = document.createElement("div");
@@ -81,24 +99,19 @@ function createItem(todo, isCompleted) {
     
     todos.splice(indexToDelete, 1);
     localStorage.setItem("todos", JSON.stringify(todos));
-    todoEl.remove();
+    reloadItems();
   })
 }
 
-function getTodos() {
-  todos.forEach((todo, index) => {
+function getTodos(filter) {
+  todos.forEach((todo) => {
     let isCompleted = todo.status == "completed" ? "checked" : "";
-    createItem(todo, isCompleted);
+    createItem(todo, isCompleted, filter);
   })
 }
 
-getTodos();
+getTodos("all");
 
-
-function getLatestItem() {
-  const latestItem = todos[todos.length - 1];
-  createItem(latestItem);
-}
 
 function reloadItems() {
   const allTasks  = taskList.querySelectorAll('.task');
@@ -108,7 +121,8 @@ function reloadItems() {
     taskList.removeChild(taskToRemove);
   }
   localStorage.setItem("todos", JSON.stringify(todos));
-  getTodos();
+  getTodos("all");
+  checkScroll();
 }
 
 function updateStatus(selectedTask) {
@@ -153,7 +167,7 @@ function addTodo() {
     todos.push(taskInfo);
     localStorage.setItem("todos", JSON.stringify(todos));
     taskInput.value = "";
-    getLatestItem();
+    reloadItems();
   } else if (task != "" && toEditId != null) {
     const taskToUpdate = todos.find(todo => todo.id === toEditId);
     taskToUpdate.name = task;
@@ -169,16 +183,27 @@ function updateMenuPosition(task) {
   const containerRect = taskList.getBoundingClientRect();
   const childRect = task.getBoundingClientRect();
 
-  const distanceToClear =  childRect.top - containerRect.top;
+  const topDistanceToClear =  childRect.top - containerRect.top;
+  const btmDistanceToClear =  containerRect.bottom - childRect.bottom;
 
   //optionsmenu is 106px tall, don't ask me how i know ;)
-  if (distanceToClear > 106) {
+  if (topDistanceToClear > 106) {
     task.classList.remove("open-downwards");
+    task.classList.remove("open-leftwards");
+    
     task.classList.add("open-upwards");
-    console.log("it should open upwards");
+    
+  } else if (btmDistanceToClear > 106) {
+    task.classList.remove("open-upwards");
+    task.classList.remove("open-leftwards");
+    
+    task.classList.add("open-downwards");
+    
   } else {
     task.classList.remove("open-upwards");
-    task.classList.add("open-downwards");
+    task.classList.remove("open-downwards");
+    
+    task.classList.add("open-leftwards");
   }
 }
 
@@ -224,6 +249,18 @@ document.addEventListener('click', function(event) {
       // Close all option menus by hiding them
       closeMenus();
     }
-
   
 });
+
+console.log(todos.length);
+
+//check if the tasks should be scrollable
+function checkScroll() {
+  if (todos.length >= 6) {
+    taskList.classList.add('scrollable');
+  } else {
+    taskList.classList.remove('scrollable');
+  }
+}
+
+checkScroll();
