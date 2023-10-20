@@ -1,10 +1,21 @@
-document.title = "Tofunmi's To-do";
-
 let taskList = document.getElementById("task-list");
 
 let todos = JSON.parse(localStorage.getItem("todos")) || [];
 
 let toEditId = null;
+
+function getUser() {
+  const user = JSON.parse(localStorage.getItem("user"));
+  if (user) {
+    console.log(user);
+    document.title = user + "'s To-do";
+    document.getElementById("name").innerHTML = user;
+  } else {
+    window.location.href = "index.html";
+  }
+}
+
+getUser();
 
 filters = document.querySelectorAll('.tab');
 
@@ -20,7 +31,6 @@ filters.forEach(filter => {
       getTodos(filter.id);
   })
 })
-
 
 function createItem(todo, isCompleted, filter) {
   //create the item
@@ -264,3 +274,20 @@ function checkScroll() {
 }
 
 checkScroll();
+
+//handle user menu
+const closeMenu = document.querySelector('.close-menu'); ;
+const clearAllBtn = document.querySelector('.clear-all');
+const logOutBtn = document.querySelector('.logout');
+
+clearAllBtn.addEventListener('click', () => {
+  todos.forEach(todo => {
+    localStorage.removeItem(todo.id);
+    console.log(todo.id);
+  });
+})
+
+logOutBtn.addEventListener('click', () => {
+  localStorage.clear();
+  window.location.href = 'index.html';
+})

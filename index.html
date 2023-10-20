@@ -5,36 +5,23 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>To-do</title>
-  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link href="index.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
   <div class="container">
     <div class="header">
-      <div class="user">
-        <p class="username"><span id="name">Tofunmi</span>'s</p>
-        <h1>To-do List</h1>
+      <div class="app-icon">
+        <div>
+          <img src='svgs/app-icon.svg'>
+        </div>
       </div>
-      <div id="profile">
-        <img src="/svgs/profile.svg" alt="profile">
-      </div>
+      <h1>Welcome to To-do<br> A simple tasks app.</h1>
     </div>
-    <div class="new-task">
-      <input type="text" placeholder="Add a new task">
-      <button id="submit" type="submit">
-        <img src="/svgs/return.svg">
-      </button>
-    </div>
-    <div class="tab-container">
-      <span id="all" class="tab active">All</span>
-      <span id="pending" class="tab">Pending</span>
-      <span id="completed" class="tab">Completed</span>
-    </div>
-    <div id="task-list" class="task-list">
-      
-    </div>
+    <input type="text" id="name" placeholder="What is your name?">
+    <span class="tip">Press <img src="svgs/return-icon.svg"> Enter to save your name and get started.</span>
   </div>
-  <script src="script.js"></script>
+  <script src="index.js"></script>
 
   <!--
   This script places a badge on your repl's full-browser view back to your repl's cover
