@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>To-do</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <div class="content">
+    <div class="container">
+      <div class="header">
+        <div class="user">
+          <p class="username"><span id="name">Tofunmi</span>'s</p>
+          <h1>To-do List</h1>
+        </div>
+        <div id="profile">
+          <img src="/svgs/profile.svg" alt="profile">
+        </div>
+      </div>
+      <div class="new-task">
+        <input type="text" placeholder="Add a new task">
+        <button id="submit" type="submit">
+          <img src="/svgs/return.svg">
+        </button>
+      </div>
+      <div class="tab-container">
+        <span id="all" class="tab active">All</span>
+        <span id="pending" class="tab">Pending</span>
+        <span id="completed" class="tab">Completed</span>
+      </div>
+      <div id="task-list" class="task-list">
+
+      </div>
+      <div class="user-menu">
+          <span class="close-menu">
+            <img src="/svgs/close.svg" alt="close">
+          </span>
+          <div class="clear-all user-menu-option">
+            <img src="svgs/delete.svg">
+            <p>Clear all tasks</p>
+          </div>
+          <div class="logout user-menu-option">
+            <img src="svgs/logout.svg">
+            <p>Logout</p>
+          </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <script src="script.js"></script>
+
+  <!--
+  This script places a badge on your repl's full-browser view back to your repl's cover
+  page. Try various colors for the theme: dark, light, red, orange, yellow, lime, green,
+  teal, blue, blurple, magenta, pink!
+  -->
+  <script src="https://replit.com/public/js/replit-badge-v2.js" theme="dark" position="bottom-right"></script>
+</body>
+
+</html>
