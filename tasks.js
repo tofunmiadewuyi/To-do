@@ -7,7 +7,6 @@ let toEditId = null;
 function getUser() {
   const user = JSON.parse(localStorage.getItem("user"));
   if (user) {
-    console.log(user);
     document.title = user + "'s To-do";
     document.getElementById("name").innerHTML = user;
   } else {
@@ -44,9 +43,8 @@ function createItem(todo, isCompleted, filter) {
       <p class="${isCompleted}">${todo.name}</p>
     </label>
     `
-    taskList.appendChild(todoEl);
-  } 
-
+  }
+  taskList.appendChild(todoEl);
 
   //create the options-menu
   const menu = document.createElement("div");
@@ -114,10 +112,28 @@ function createItem(todo, isCompleted, filter) {
 }
 
 function getTodos(filter) {
-  todos.forEach((todo) => {
-    let isCompleted = todo.status == "completed" ? "checked" : "";
-    createItem(todo, isCompleted, filter);
+  //remove all existing content
+  const taskListItems = document.querySelectorAll('.empty-state');
+  taskListItems.forEach(item => {
+    item.remove();
   })
+  
+  if (todos.length > 0) {
+    todos.forEach((todo) => {
+      let isCompleted = todo.status == "completed" ? "checked" : "";
+      createItem(todo, isCompleted, filter);
+      })}
+    else {
+      const emptyEl = document.createElement("div");
+          emptyEl.classList.add("empty-state");
+        emptyEl.innerHTML = `
+        <div class="empty-state-content">
+          <img src="/svgs/emptystate.svg" alt="empty state image">
+          <p class="">This list is empty.</p>
+        </div>
+        `
+        taskList.appendChild(emptyEl);
+    }
 }
 
 getTodos("all");
@@ -276,18 +292,34 @@ function checkScroll() {
 checkScroll();
 
 //handle user menu
-const closeMenu = document.querySelector('.close-menu'); ;
 const clearAllBtn = document.querySelector('.clear-all');
 const logOutBtn = document.querySelector('.logout');
 
 clearAllBtn.addEventListener('click', () => {
   todos.forEach(todo => {
     localStorage.removeItem(todo.id);
-    console.log(todo.id);
+    console.log(todo);
+    // console.log(todo.id);
+    console.log("remove works?");
   });
 })
 
 logOutBtn.addEventListener('click', () => {
   localStorage.clear();
   window.location.href = 'index.html';
+})
+
+//handle menu open/close
+const profileBtn = document.getElementById("profile");
+
+profileBtn.addEventListener('click', () => {
+  const userMenu = document.querySelector('.user-menu');
+  userMenu.classList.toggle('hide-menu');
+})
+
+const closeMenuBtn = document.querySelector('.close-menu');
+
+  closeMenuBtn.addEventListener('click', () => {
+  const userMenu = document.querySelector('.user-menu');
+  userMenu.classList.toggle('hide-menu');
 })
