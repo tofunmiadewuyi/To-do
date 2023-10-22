@@ -21,12 +21,13 @@ body {
   justify-content: center;
   color: #030502;
   height: 100vh;
+  flex-direction: column;
 }
 
 .container {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 2rem 1.5rem;
   padding: 1.5rem;
   border-radius: 20px;
   border: 1px solid rgba(3, 5, 2, 0.07);
@@ -42,37 +43,15 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 1.5rem;
+  gap: 0px;
 }
 
-.welcome-text {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+h1 {
+  font-size: 24px;
   text-align: center;
+  color: #596250;
 }
 
-.app-icon {
-  background-color: #ECF4E6;
-  border-radius: 9px;
-  border: 1px solid rgba(89, 98, 80, 0.08);
-  box-shadow: 0px -2px 8px 0px rgba(3, 5, 2, 0.17) inset;
-  overflow: hidden;
-  padding-bottom: 8px;
-}
-
-.app-icon > div {
-  background-color: #fff;
-  padding: 12px 16px;
-  border-radius: 8px;
-  border-bottom: 1px solid rgba(95, 144, 60, 0.20);
-  box-shadow: 0px 1px 8px 0px rgba(3, 5, 2, 0.12), 0px 4px 4px 0px rgba(220, 238, 206, 0.25);
-  box-sizing: border-box;
-}
-
-.welcome-text > p {
-  color: rgba(3, 5, 2, 0.60);;
-}
 
 input[type=text] {
   display: flex;
@@ -100,9 +79,18 @@ input[type=text]:focus {
 
 
 .tip {
-  display: flex;
-  gap: 4px;
-  align-items: center;
+  text-align: center;
   width: 100%;
-  justify-content: center;
+}
+
+.signature {
+  display: flex;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 12px;
+  text-align: center;
+  margin-top: 3%;
+}
+
+a {
+  color: #596250;
 }

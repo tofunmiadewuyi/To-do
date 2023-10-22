@@ -18,7 +18,7 @@ function checkStatus() {
   const user = JSON.parse(localStorage.getItem('user'));
   if (user) {
     console.log(user);
-    window.location.href = "homepage.html";
+    window.location.href = "tasks.html";
   } else {
     console.log("No user found");
     //focus on the input
