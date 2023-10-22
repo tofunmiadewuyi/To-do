@@ -26,7 +26,6 @@ filters.forEach(filter => {
     allTasks.forEach(task => {
       task.remove();
     })
-    
       getTodos(filter.id);
   })
 })
@@ -43,9 +42,14 @@ function createItem(todo, isCompleted, filter) {
       <p class="${isCompleted}">${todo.name}</p>
     </label>
     `
+    taskList.appendChild(todoEl);
+  } else {
+    console.log("else is elsing...");
+    addEmptyState();
   }
-  taskList.appendChild(todoEl);
 
+  purgeEmptyState();
+  
   //create the options-menu
   const menu = document.createElement("div");
   menu.classList.add("options-menu");
@@ -124,15 +128,7 @@ function getTodos(filter) {
       createItem(todo, isCompleted, filter);
       })}
     else {
-      const emptyEl = document.createElement("div");
-          emptyEl.classList.add("empty-state");
-        emptyEl.innerHTML = `
-        <div class="empty-state-content">
-          <img src="/svgs/emptystate.svg" alt="empty state image">
-          <p class="">This list is empty.</p>
-        </div>
-        `
-        taskList.appendChild(emptyEl);
+      addEmptyState();
     }
 }
 
@@ -182,7 +178,7 @@ const taskInput = document.querySelector(".new-task input");
 taskInput.addEventListener("keypress", function(event) {
   if (event.key === "Enter") {
     addTodo();
-    
+    userMenu.classList.add('hide-menu');
   }
 });
 
@@ -202,6 +198,7 @@ function addTodo() {
     taskInput.value = "";
     toEditId = null;
     reloadItems();
+    
   }
 }
 
@@ -292,17 +289,17 @@ function checkScroll() {
 checkScroll();
 
 //handle user menu
+const userMenu = document.querySelector('.user-menu');
+
 const clearAllBtn = document.querySelector('.clear-all');
 const logOutBtn = document.querySelector('.logout');
 
 clearAllBtn.addEventListener('click', () => {
-  todos.forEach(todo => {
-    localStorage.removeItem(todo.id);
-    console.log(todo);
-    // console.log(todo.id);
-    console.log("remove works?");
-  });
-})
+  todos = []
+  localStorage.setItem("todos", JSON.stringify(todos));
+  reloadItems();
+  userMenu.classList.add('hide-menu');
+});
 
 logOutBtn.addEventListener('click', () => {
   localStorage.clear();
@@ -313,7 +310,6 @@ logOutBtn.addEventListener('click', () => {
 const profileBtn = document.getElementById("profile");
 
 profileBtn.addEventListener('click', () => {
-  const userMenu = document.querySelector('.user-menu');
   userMenu.classList.toggle('hide-menu');
 })
 
@@ -323,3 +319,29 @@ const closeMenuBtn = document.querySelector('.close-menu');
   const userMenu = document.querySelector('.user-menu');
   userMenu.classList.toggle('hide-menu');
 })
+
+
+//empty state
+
+function addEmptyState() {
+  const allEmptyStates = document.querySelectorAll('.empty-state');
+  allEmptyStates.forEach(item => {
+    item.remove();
+  })
+  const emptyEl = document.createElement("div");
+    emptyEl.classList.add("empty-state");
+  emptyEl.innerHTML = `
+  <div class="empty-state-content">
+    <img src="/svgs/emptystate.svg" alt="empty state image">
+    <p class="">This list is empty.</p>
+  </div>
+  `
+  taskList.appendChild(emptyEl);
+}
+
+//purge empty state
+function purgeEmptyState() {
+  if (document.querySelectorAll('.task').length > 0 && document.querySelector('.empty-state') != null) {
+    document.querySelector('.empty-state').remove();
+  }
+}
