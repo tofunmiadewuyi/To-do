@@ -156,8 +156,6 @@ function updateStatus(selectedTask) {
   //check task status
   if (selectedTask.checked) {
     taskName.classList.add("checked");
-    console.log(idToCheck);
-    console.log(indexToCheck);
     todos[indexToCheck].status = "completed";
   } else {
     taskName.classList.remove("checked");
@@ -322,7 +320,6 @@ const closeMenuBtn = document.querySelector('.close-menu');
 
 
 //empty state
-
 function addEmptyState() {
   const allEmptyStates = document.querySelectorAll('.empty-state');
   allEmptyStates.forEach(item => {
