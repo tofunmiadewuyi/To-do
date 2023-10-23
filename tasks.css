@@ -40,7 +40,7 @@ body {
   border: 1px solid rgba(3, 5, 2, 0.07);
   background: #FFF;
   box-shadow: 0px 1px 2px 0px rgba(3, 5, 2, 0.07);
-  width: 70%;
+  width: 100%;
   min-width: 320px;
   max-width: 430px;
   min-height: 650px;
@@ -90,6 +90,7 @@ input[type=text] {
   border: 1px solid rgba(89, 98, 80, 0.09);
   background: #FAFBF9;
   box-shadow: 1px 1px 3px 0px rgba(3, 5, 2, 0.15) inset;
+  font-size: 16px;
 }
 
 input[type=text]::placeholder {
@@ -218,7 +219,7 @@ input[type=text]:focus {
 }
 
 .task:hover {
-  scale: 1.02;
+  /* scale: 1.01; */
   background: rgba(236, 244, 230, 0.35);
 }
 
@@ -374,4 +375,26 @@ div.delete {
 
 a {
   color: #596250;
+}
+
+@media (max-width: 450px) {
+  body {
+    display: flex;
+    align-items: flex-start !important;
+    justify-content: center;
+    color: #030502;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .container {
+    border-radius: 0px;
+    /* height: calc(100vh - 10%); */
+  }
+
+  .task:hover {
+    scale: 1;
+    background: rgba(236, 244, 230, 0.35);
+  }
+  /* Add more styles as needed for your mobile design */
 }
